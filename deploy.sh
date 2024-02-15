@@ -4,22 +4,22 @@
 set -e
 
 # build
-npm run build
+npm run build  # билдим проект
 
-# navigate into the build output directory
+# переходим в папку билда
 cd dist
 
-# если вы деплоите на кастомный домен
+# если вы деплоите на кастомный домен 
 # echo 'www.example.com' > CNAME
 
-git init
-git add -A
-git commit -m 'deploy'
+git init # инициализируем собственный гит внутри проекта для отслеживания изменений
+git add -A  # добавляем все изменения
+git commit -m 'deploy'  # коммитим
 
-# если вы деплоите на https://<USERNAME>.github.io
+# если вы деплоите на https://<USERNAME>.github.io  -  это в случае основного сайта гита
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
 # если вы деплоите на https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:fess986/react-crypto.git master:gh-pages
+git push -f git@github.com:fess986/react-crypto.git master:gh-pages  # принудительно пушим изменения из нашей ветки master на удалённую gh-pages, таким образом мы не создавая локально ветку gh-pages - передавать её удалённо
 
-cd -
+cd - # возвращаемся в исходный репозиторий 
