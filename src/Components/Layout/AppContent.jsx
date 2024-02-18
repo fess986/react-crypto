@@ -3,17 +3,21 @@ import { useCryptoContext } from "../../context/context";
 import PortfolioChart from "./PortfolioChart";
 import AccetsTable from "./AccetsTable";
 
-const contentStyle = {
+
+
+export default function AppContent() {
+	const { cryptoInfo, assets, drawerState } = useCryptoContext();
+
+	const contentStyle = {
 	textAlign: "center",
 	minHeight: "calc(100vh - 60px)", // вычисляем высоту так, чтобы из всей высоты вычитывалась высота хедера, которая у нас составляет 60px
 	color: "#fff",
 	backgroundColor: "#001529",
 	padding: "1rem",
-	// maxWidth: '30%',
+	transition: "all 0.3s",
+	maxWidth: drawerState.getState() ? '33%' : '100%',
+	// maxWidth: drawerState.getState() && '33%',
 };
-
-export default function AppContent() {
-	const { cryptoInfo, assets } = useCryptoContext();
 
 	// создадим карту стоимости валют на основе массива валют cryptoInfo, для того чтобы в дальнейшем избежать итерирования по этому массиву каждый раз, когда нам нужно узнать цену какой либо валюты
 	const cryptoCoinCosts = cryptoInfo.reduce((acc, coin) => {
