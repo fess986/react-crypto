@@ -9,6 +9,7 @@ const contentStyle = {
 	color: "#fff",
 	backgroundColor: "#001529",
 	padding: "1rem",
+	// maxWidth: '30%',
 };
 
 export default function AppContent() {
