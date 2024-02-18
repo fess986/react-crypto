@@ -47,10 +47,9 @@ const headerStyle = {
 export default function AppHeader() {
 	const [isSelectOpened, setIsSelectOpened] = useState(false);
 	const [isSModalOpened, setIsSModalOpened] = useState(false);
-	const [isDrawerOpened, setIsDrawerOpened] = useState(false);
 	const [coin, setCoin] = useState(null);
 
-	const { cryptoInfo } = useCryptoContext();
+	const { cryptoInfo, drawerState } = useCryptoContext();
 
 	useEffect(() => {
 		const keydown = (event) => {
@@ -107,7 +106,9 @@ export default function AppHeader() {
 				)}
 			/>
 
-			<Button type="primary" onClick={() => setIsDrawerOpened(true)}>
+			<Button type="primary" onClick={() => {
+				drawerState.setState(true);
+			}}>
 				Add Asset
 			</Button>
 
@@ -124,10 +125,14 @@ export default function AppHeader() {
 				destroyOnClose  // обнуляем все параметры при закрытии. Это нужно для того чтобы обнулять стейт текущей валюты
 				width={600}
 				title="Add Asset"
-				onClose={() => setIsDrawerOpened(false)}
-				open={isDrawerOpened}
+				onClose={() => {
+					drawerState.setState(false);
+				}}
+				open={drawerState.getState()}
 			>
-				<AddAssetForm onResultButtonClick={() => setIsDrawerOpened(false)}/>
+				<AddAssetForm onResultButtonClick={() => {
+					drawerState.setState(false);
+				}}/>
 			</Drawer>
 		</Layout.Header>
 	);

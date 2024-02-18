@@ -14,6 +14,17 @@ const CryptoContextProvider = function ({ children }) {
 	const [loading, setLoading] = useState(false);
 	const [cryptoInfo, setCryptoInfo] = useState([]);
 	const [assets, setAssets] = useState([]);
+	const [isDrawerOpened, setIsDrawerOpened] = useState(false)
+
+	const drawerState = {
+		getState() {
+			return isDrawerOpened
+		},
+
+		setState(state) {
+			setIsDrawerOpened(state);
+		}
+	}
 
 	// эта функция берёт массив assets с нашими валютами и на основе данных из массива cryptoInfo, добавляет к каждому объекту-крипте необходимые нам поля, которые понадобятся далее в работе
 	const upgradeAssets = (assets, cryptoInfo) => {
@@ -58,7 +69,7 @@ const CryptoContextProvider = function ({ children }) {
 	};
 
 	return (
-		<CryptoContext.Provider value={{ loading, cryptoInfo, assets, addAsset }}>
+		<CryptoContext.Provider value={{ loading, cryptoInfo, assets, addAsset, drawerState }}>
 			{children}
 		</CryptoContext.Provider>
 	);
